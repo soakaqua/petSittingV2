@@ -44,7 +44,7 @@ public class test {
 //		daoCompte.deleteById(100);
 		
 		//----- Test deleteById --------
-		daoCompte.delete(c2);;
+//		daoCompte.delete(c2);;
 		
 		
 		// ------------------------ Fin tests ! ------------------------
