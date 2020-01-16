@@ -50,17 +50,33 @@ public class Annonce {
 		
 	}
 	
+	
+	
+	public Annonce(String titre, String msg, int numC, List<Service> listService) {
+		this.titre = titre;
+		this.msg = msg;
+		this.numC = numC;
+		this.listService = listService;
+	}
+
+	public Annonce(int numA, String titre, String msg, int numC, List<Service> listService) {
+		this.numA = numA;
+		this.titre = titre;
+		this.msg = msg;
+		this.numC = numC;
+		this.listService = null;
+	}
+
 	public Annonce(int numA, String titre, String msg, double noteP, double noteS, double statut, int numC,
 			List<Service> listService) {
-		super();
 		this.numA = numA;
 		this.titre = titre;
 		this.msg = msg;
 		this.noteP = noteP;
 		this.noteS = noteS;
-		this.statut = statut;
+		this.statut = 0;
 		this.numC = numC;
-		this.listService = listService;
+		this.listService = null;
 	}
 
 	public int getNumA() {

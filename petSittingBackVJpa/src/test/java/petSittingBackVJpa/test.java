@@ -45,7 +45,12 @@ public class test {
         
         //----- Test selectAnnonceBySitter --------
         
-        
+      //----- Test insert --------
+//	      DaoCompte daoCompte = DaoCompteFactory.getInstance();
+//	      Compte c = new Compte();
+//	      c.setMail("1@1");
+//	      c.setMdpC("1");
+//	      daoCompte.insert(c);
 
         //----- Test selectById --------
 //        Annonce c2 = new Annonce();
