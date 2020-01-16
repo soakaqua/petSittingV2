@@ -7,13 +7,10 @@ import javax.persistence.Query;
 import model.Service;
 import util.JpaContext;
 
-
-
-
 public class DaoServiceJpaImpl implements DaoService {
 
 	@Override
-	public Object selectById(Object key) {
+	public Service selectById(Integer key) {
 		{
 			EntityManager em = JpaContext.getInstance().createEntityManager();	
 			Service s = null;
@@ -21,11 +18,10 @@ public class DaoServiceJpaImpl implements DaoService {
 			em.close();
 			return s;
 		}
-
 	}
 
 	@Override
-	public List selectAll() {
+	public List<Service> selectAll() {
 		EntityManager em = JpaContext.getInstance().createEntityManager();
 		List<Service> services = null;
 		Query query = em.createQuery("from Service s");
@@ -35,8 +31,8 @@ public class DaoServiceJpaImpl implements DaoService {
 	}
 
 	@Override
-	public void insert(Object obj) {
-		
+	public void insert(Service obj) {
+
 		EntityManager em = JpaContext.getInstance().createEntityManager();
 		EntityTransaction tx = null;
 
@@ -65,9 +61,8 @@ public class DaoServiceJpaImpl implements DaoService {
 		
 	}
 
-
 	@Override
-	public Object update(Object obj) 
+	public Service update(Service obj)
 	{
 		EntityManager em = JpaContext.getInstance().createEntityManager();
 		EntityTransaction tx = null;
@@ -97,10 +92,10 @@ public class DaoServiceJpaImpl implements DaoService {
 		return s;
 
 	}
-
+	
 
 	@Override
-	public void delete(Object obj) {
+	public void delete(Service obj) {
 		{
 			EntityManager em = JpaContext.getInstance().createEntityManager();
 			EntityTransaction tx = null;
@@ -129,16 +124,37 @@ public class DaoServiceJpaImpl implements DaoService {
 			}
 			
 		}
-
 		
 	}
 
 	@Override
-	public void deleteById(Object key) {
+	public void deleteById(Integer key) {
 		{	
 			delete(selectById(key));
 		}
 		
-	}
+	
+			
 
+		}
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
