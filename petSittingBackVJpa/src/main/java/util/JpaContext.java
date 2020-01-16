@@ -9,7 +9,7 @@ public class JpaContext { //On construit la factory pour l'emf. pour qu'il n'y e
 		
 		public static EntityManagerFactory getInstance() {
 			if(emf==null) {
-			emf = Persistence.createEntityManagerFactory("jpa");
+			emf = Persistence.createEntityManagerFactory("petSittingBackVJpa");
 			}
 				return emf;
 			
