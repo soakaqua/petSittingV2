@@ -19,7 +19,7 @@ public class test {
 
 		// ------------------ Faite vos tests ici ! --------------------
 		
-<<<<<<< HEAD
+
 		//----- Test Insert --------
         DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance();
         Annonce c = new Annonce();
@@ -63,41 +63,7 @@ public class test {
         //----- Test deleteById --------
 //        daoAnnonce.deleteById(100);
 
-        //----- Test deleteById --------
-//        daoCompte.delete(c2);;
 		
-		
-		
-		
-		
-=======
->>>>>>> master
-		
-		//----- Test Insert --------
-		DaoCompte daoCompte = DaoCompteFactory.getInstance();
-		Compte c = new Compte();
-		c.setMail("1@1");
-		c.setMdpC("1");
-		daoCompte.insert(c);
-
-		
-		//----- Test selectById --------
-		Compte c2 = new Compte();
-		c2 = daoCompte.selectById(100);
-		System.out.println(c2);
-		
-		//----- Test update --------
-		c.setNom("toto");
-		c = daoCompte.update(c);
-		System.out.println(c.getNom());
-		//----- Test selectAll --------
-		System.out.println(daoCompte.selectAll());
-		
-		//----- Test deleteById --------
-//		daoCompte.deleteById(100);
-		
-		//----- Test deleteById --------
-		daoCompte.delete(c2);;
 		
 		
 		// ------------------------ Fin tests ! ------------------------
