@@ -2,31 +2,73 @@ package model;
 
 import java.sql.SQLException;
 import java.util.InputMismatchException;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import model.*;
 import dao.*;
 
+@Entity
+@Table(name ="compte")
+@SequenceGenerator(name = "seqCompte", sequenceName = "seq_compte",initialValue = 100, allocationSize = 1)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 1 table ! ajouter discriminatorColumn et discriminatorValue dans classes filles
 public class Compte {
-	protected Integer numC, cp;
-	protected String mdpC, mail,statut;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCompte")
+	private Integer numC;
+	@Column(name ="cp", length = 15)
+	private Integer cp;
+	@Column(name ="mdp", length = 30)
+	private String mdpC;
+	@Column(name ="mail", length = 50)
+	private String mail;
+	@Column(name ="statut", length = 1)
+	private int statut;
+	@Column(name ="nom", length = 50)
+	private String nom;
+	@Column(name ="prenom", length = 50)
+	private String prenom;
+	@Version
+	private int version;
+
+	//@OneToMany(mappedBy = "annonce" )
+	//private Set<Annonce> annonces;
 	
-	public Compte(Integer numC, String mail, String mdpC, Integer cp, String statut) {
+	
+	public Compte(Integer numC, Integer cp, String mdpC, String mail, String nom, String prenom) {
 		this.numC = numC;
 		this.cp = cp;
 		this.mdpC = mdpC;
 		this.mail = mail;
-		this.statut = statut;
-		
+		this.statut = 0;
+		this.nom = nom;
+		this.prenom = prenom;
 	}
+
 	public Compte(String mail, String mdpC, Integer cp) {
-		
 		this.cp = cp;
 		this.mdpC = mdpC;
 		this.mail = mail;
-		this.statut = "non validé";
+		this.statut = 0;
 	}
-
 	
+	
+
+	public Compte() {
+		
+	}
 
 	public Integer getNumC() {
 		return numC;
@@ -52,20 +94,64 @@ public class Compte {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	public String getStatut() {
+	public int getStatut() {
 		return statut;
 	}
-	public void setStatut(String statut) {
+	public void setStatut(int statut) {
 		this.statut = statut;
 	}
 	
 
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public String getPrenom() {
+		return prenom;
+	}
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
 	@Override
 	public String toString() {
 		return "Compte [numC=" + numC + ", cp=" + cp + ", mdpC=" + mdpC + ", mail=" + mail + ", statut=" + statut + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((numC == null) ? 0 : numC.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Compte other = (Compte) obj;
+		if (numC == null) {
+			if (other.numC != null)
+				return false;
+		} else if (!numC.equals(other.numC))
+			return false;
+		return true;
+	}
 	
 
+	
+	
+	
+	
+	
+	
+	
 //	public void gestCompte(Integer id) throws ClassNotFoundException, SQLException {
 //		//Permet de modifier mdp, mail, adresses.
 //		int choix = 0;
