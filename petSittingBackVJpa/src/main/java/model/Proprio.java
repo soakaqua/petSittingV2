@@ -15,6 +15,10 @@ public class Proprio extends Compte {
 	}
 
 
+	//Consulter mes annonces
+	//afficherAnnoncesPubliees(numC)
+	
+
 	
 	
 	
