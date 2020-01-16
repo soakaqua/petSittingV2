@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion> <!--> Lié au projet en cours < -->
+	<groupId>petSitting</groupId>
+	<artifactId>petSitting_FrontV2</artifactId> <!--> Nom du projet en cours < -->
+	<packaging>war</packaging> <!--> Comment maven créé le projer (jar, war ou pom) < -->
+	<version>1.0-SNAPSHOT</version> <!--> Version actuelle < -->
+
+
+	<dependencies>  <!--> Gère les librairies à dl automatiquement < -->
+		<dependency> <!--> chercher dans mvnripository les librairies voulues < -->
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>petSitting</groupId>
+			<artifactId>petSittingBackVJpa</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+	</dependencies>
+
+	<properties>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+
+</project>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="petSittingBackVJpa" 
+		transaction-type="RESOURCE_LOCAL"> <!--  peut etre differente du nom de la bdd--> <!-- resource_local : mode standalone -->
+
+		<!-- implémentation de jpa : implémente des fonctionnalités sur l'API JPA 
+			(vide) avec hibernate pour nous-->
+		<provider>
+   			 org.hibernate.jpa.HibernatePersistenceProvider 		
+		</provider>
+		
+	<!--	<class>model.Personne</class> -->
+		
+		<properties>
+			<!-- Propriétés à mettre en place : driver -->
+			<property name="hibernate.connection.driver"
+				value="org.postgresql.Driver" />
+			<!-- url -->
+			<property name="hibernate.connection.url"
+				value="jdbc:postgresql://127.0.0.1:5432/petsitting" /> <!-- nom à la fin : ici jpa parce que nom bdd est jpa-->
+			<!-- login -->
+			<property name="hibernate.connection.user" value="postgres" />
+			<!-- mdp -->
+			<property name="hibernate.connection.password" value="root" />
+			<!-- dialect hibernate : propriété d'hibernate : un peu comme un driver jdbc pour hibernate -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+			<!-- gestion des tables de la bdd ; hibernate check la structure de la bdd pour voir si ça correspond avec les objets qu'on manipule ; en cas de pb : 
+			hibernate peux créer les tables tout seul pour les faire correspondre 
+			Ici on configure cette propriété pour ne pas avoir a creer les tables-->
+			<!-- Validate : control simple ,  
+			create : recreer tables à chaque démarrage, 
+			create-drop : démarrage : creation ; fin : drop; , 
+			update : creer tables et ajoute colonnes si pb. attention : update ne sait pas supr de colonnes -->
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<!--  -->
+			<property name="hibernate.show_sql" value="true"/> <!-- affiche les requetes sql dans la console pour value = "true" -->
+			<!-- -->
+			<property name="hibernate.format_sql" value="true"/> <!--  modifie mise en page du code pour  -->
+			
+			
+		</properties>
+
+	</persistence-unit>
+
+
+</persistence>
