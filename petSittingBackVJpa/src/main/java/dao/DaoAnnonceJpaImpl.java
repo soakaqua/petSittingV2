@@ -11,12 +11,17 @@ import util.JpaContext;
 
 public class DaoAnnonceJpaImpl implements DaoAnnonce {
 
+//	public Annonce selectReponseByNumA(numA){
+//		
+//	}
+
+	
 	//-----------------------------------------------------------------------------------DAO SPECIFIQUE
 	
 	public List<Annonce> selectAnnonceByProprio(Integer numC) { //afficherAnnoncesPubliees(); Consulter mes annonces PROPRIO
 		EntityManager em=JpaContext.getInstance().createEntityManager();
 		List<Annonce> annonces=null;
-		Query query=em.createQuery("select distinct p from Annonce p where numC=:numC"); 
+		Query query=em.createQuery("select distinct p from Annonce p where p.numC=:numC"); 
 		query.setParameter("numC", numC);
 		annonces=query.getResultList();
 		em.close();
@@ -27,7 +32,7 @@ public class DaoAnnonceJpaImpl implements DaoAnnonce {
 	public List<Annonce> afficherAnnoncesTerminees(Integer numC) { //noterS(); Noter un sitter PROPRIO
 		EntityManager em=JpaContext.getInstance().createEntityManager();
 		List<Annonce> annonces=null;
-		Query query=em.createQuery("select distinct p from Annonce p where numC=:numC and statut==1");  
+		Query query=em.createQuery("select distinct p from Annonce p where p.statut=1");  //numC=:numC and 
 		query.setParameter("numC", numC);
 		annonces=query.getResultList();
 		em.close();

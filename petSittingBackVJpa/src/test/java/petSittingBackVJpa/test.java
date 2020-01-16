@@ -35,7 +35,7 @@ public class test {
         
       List<Annonce> c2 = new ArrayList();
       c2 =daoAnnonce.selectAnnonceByProprio(10);
-      System.out.println(c2);       
+      System.out.println(c2);
         
         
         //----- Test selectAnnonceBySitter --------
