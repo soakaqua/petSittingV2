@@ -7,50 +7,59 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Embeddable
-public class ReponsePK implements Serializable {
-	
+public class Annonce_ServicePK implements Serializable{
+
 	@ManyToOne
-	@JoinColumn(name = "sitter_numc", foreignKey =@ForeignKey(name="reponse_sitter_numc_fk"))
-	private Sitter sitter;
-	
-	@ManyToOne
-	@JoinColumn(name ="annonce_numa", foreignKey = @ForeignKey(name ="reponse_annonce_numa_fk"))
+	@JoinColumn(name="annonce_id", foreignKey = @ForeignKey(name="annonce_service_annonce_id_fk")) 
 	private Annonce annonce;
-	
-	public ReponsePK() {
-		
+	@ManyToOne
+	@JoinColumn(name="service_id", foreignKey = @ForeignKey(name="annonce_service_service_id_fk")) 
+	private Service service;
+
+
+	public Annonce_ServicePK() {
+
 	}
 
-	public ReponsePK(Sitter compte, Annonce annonce) {
-		this.sitter = sitter;
+
+	public Annonce_ServicePK(Annonce annonce, Service service) {
+		super();
 		this.annonce = annonce;
+		this.service = service;
 	}
 
-	public Compte getCompte() {
-		return sitter;
-	}
-
-	public void setCompte(Compte compte) {
-		this.sitter = sitter;
-	}
 
 	public Annonce getAnnonce() {
 		return annonce;
 	}
 
+
 	public void setAnnonce(Annonce annonce) {
 		this.annonce = annonce;
 	}
+
+
+	public Service getService() {
+		return service;
+	}
+
+
+	public void setService(Service service) {
+		this.service = service;
+	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((annonce == null) ? 0 : annonce.hashCode());
-		result = prime * result + ((sitter == null) ? 0 : sitter.hashCode());
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -60,22 +69,19 @@ public class ReponsePK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReponsePK other = (ReponsePK) obj;
+		Annonce_ServicePK other = (Annonce_ServicePK) obj;
 		if (annonce == null) {
 			if (other.annonce != null)
 				return false;
 		} else if (!annonce.equals(other.annonce))
 			return false;
-		if (sitter == null) {
-			if (other.sitter != null)
+		if (service == null) {
+			if (other.service != null)
 				return false;
-		} else if (!sitter.equals(other.sitter))
+		} else if (!service.equals(other.service))
 			return false;
 		return true;
 	}
-	
-	
-	
 	
 	
 	

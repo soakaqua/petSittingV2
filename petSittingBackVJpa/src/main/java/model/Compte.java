@@ -43,9 +43,7 @@ public class Compte {
 	@Version
 	private int version;
 
-//	@OneToMany(mappedBy = "key.compte" ) //erreur bidon ici
-//	private Set<Annonce> reponses;
-	
+
 	
 	public Compte(Integer numC, Integer cp, String mdpC, String mail, String nom, String prenom) {
 		this.numC = numC;
