@@ -35,7 +35,7 @@ public class Proprio extends Compte {
 		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); 
 		Annonce a=new Annonce(titre, msg, numC,	listService);
 		daoAnnonce.insert(a);
-	} //numA à entrer ?
+	}
 	
 	public void modifierAnnonce(int numA, String titre, String msg, int numC, Set<Service> listService) {
 		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); 
