@@ -13,8 +13,8 @@ public class Reponse {
 	@EmbeddedId
 	private ReponsePK key;
 	
-	@Column(name = "reponse", length =200 )
-	private String reponse;
+	@Column(name = "message", length =200 )
+	private String message;
 	
 	@Version
 	private int version;
@@ -23,9 +23,9 @@ public class Reponse {
 		
 	}
 
-	public Reponse(ReponsePK key, String reponse, int version) {
+	public Reponse(ReponsePK key, String message, int version) {
 		this.key = key;
-		this.reponse = reponse;
+		this.message = message;
 		this.version = version;
 	}
 
@@ -37,12 +37,12 @@ public class Reponse {
 		this.key = key;
 	}
 
-	public String getReponse() {
-		return reponse;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setReponse(String reponse) {
-		this.reponse = reponse;
+	public void setMessage(String reponse) {
+		this.message = message;
 	}
 
 	public int getVersion() {
