@@ -35,7 +35,7 @@
 			create : recreer tables à chaque démarrage, 
 			create-drop : démarrage : creation ; fin : drop; , 
 			update : creer tables et ajoute colonnes si pb. attention : update ne sait pas supr de colonnes -->
-			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<!--  -->
 			<property name="hibernate.show_sql" value="true"/> <!-- affiche les requetes sql dans la console pour value = "true" -->
 			<!-- -->
