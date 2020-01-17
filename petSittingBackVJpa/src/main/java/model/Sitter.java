@@ -30,30 +30,30 @@ public class Sitter extends Compte {
 
 	}
 
-//	public static List<Annonce> afficherAnnoncesEnCours(){ // attention : supprimer static dans classe ?.
-//		EntityManager em=JpaContext.getInstance().createEntityManager();
-//		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); // attention : supprimer ligne dans dao.
-//		List<Annonce> annonces=null;
-////		annonces = SelectAllWithStatut0(); //Attention : a remplacer par ligne du dessous.
-//		annonces = daoAnnonce.SelectAllWithStatut0();
-//		
-//		em.close();
-//
-//		return annonces;
-//	}
-//	
-//	public static void postulerAnnonce(Sitter s, Annonce a, String message) {
-//		EntityManager em=JpaContext.getInstance().createEntityManager();
-//		DaoReponse daoReponse = DaoReponseFactory.getInstance(); // attention : supprimer ligne dans dao.
-//		ReponsePK key = new ReponsePK((Sitter) s, a);
-//		Reponse rep = new Reponse(key, message);
-//		System.out.println(s.getNumC());
-//		daoReponse.insert(rep);
-//		
-//		
-//		em.close();
-//		
-//	}
+	public static List<Annonce> afficherAnnoncesEnCours(){ // attention : supprimer static dans classe ?.
+		EntityManager em=JpaContext.getInstance().createEntityManager();
+		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); // attention : supprimer ligne dans dao.
+		List<Annonce> annonces=null;
+//		annonces = SelectAllWithStatut0(); //Attention : a remplacer par ligne du dessous.
+		annonces = daoAnnonce.SelectAllWithStatut0();
+		
+		em.close();
+
+		return annonces;
+	}
+	
+	public static void postulerAnnonce(Sitter s, Annonce a, String message) {
+		EntityManager em=JpaContext.getInstance().createEntityManager();
+		DaoReponse daoReponse = DaoReponseFactory.getInstance(); // attention : supprimer ligne dans dao.
+		ReponsePK key = new ReponsePK((Sitter) s, a);
+		Reponse rep = new Reponse(key, message);
+		System.out.println(s.getNumC());
+		daoReponse.insert(rep);
+		
+		
+		em.close();
+		
+	}
 	
 
 	
