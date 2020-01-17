@@ -19,7 +19,7 @@ import dao.DaoAnnonceFactory;
 @DiscriminatorValue("P")
 public class Proprio extends Compte {
 
-	@OneToMany(mappedBy = "proprio")
+	@OneToMany
 	@JoinColumn(name="proprio_annonce",foreignKey=@ForeignKey(name="proprio_annonce_fk"))
 	private Set<Annonce> annonces;	
 	
