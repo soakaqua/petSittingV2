@@ -7,6 +7,10 @@ import java.util.Set;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import dao.DaoAnnonce;
 import dao.DaoAnnonceFactory;
@@ -15,6 +19,10 @@ import dao.DaoAnnonceFactory;
 @DiscriminatorValue("P")
 public class Proprio extends Compte {
 
+	@OneToMany(mappedBy = "proprio")
+	@JoinColumn(name="proprio_annonce",foreignKey=@ForeignKey(name="proprio_annonce_fk"))
+	private Set<Annonce> annonces;	
+	
 	public Proprio(Integer numC, Integer cp, String mdpC, String mail, String nom, String prenom) {
 	}
 	
@@ -31,15 +39,18 @@ public class Proprio extends Compte {
 		return list;
 	}
 	
-	public void publierAnnonce(String titre, String msg, int numC, Set<Service> listService) {
+	public static void publierAnnonce(String titre, String message, int numC, Set<Annonce_Service> annonce_service) {
 		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); 
-		Annonce a=new Annonce(titre, msg, numC,	listService);
+		Annonce a=new Annonce(titre, message, numC,	annonce_service);
 		daoAnnonce.insert(a);
 	}
 	
-	public void modifierAnnonce(int numA, String titre, String msg, int numC, Set<Service> listService) {
+	public static void modifierAnnonce(int numA, String titre, String message, Set<Annonce_Service> annonce_service) {
 		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); 
-		Annonce a=new Annonce(numA, titre, msg, numC, listService);
+		Annonce a=new Annonce(numA, titre, message, annonce_service);
+		a.setTitre(titre);
+		a.setMessage(message);
+		a.setListService(annonce_service);
 		daoAnnonce.update(a);
 	} 
 	

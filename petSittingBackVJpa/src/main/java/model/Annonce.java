@@ -19,7 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
-import jpa.model.Enseignement;
+import dao.DaoAnnonce;
+import dao.DaoAnnonceFactory;
+
 
 @Entity
 @Table(name="annonce")
@@ -31,12 +33,12 @@ public class Annonce {
 	private int numA ;
 	@Column(length=500,nullable=false)
 	private String titre;
-	@Column(length=1000,nullable=false)
-	private String msg;
+	@Column(length=1000,nullable=false, name="message")
+	private String message;
 	@Column
-	private double noteP;
+	private Double noteP;
 	@Column
-	private double noteS;
+	private Double noteS;
 	@Column
 	private int statut;
 	@Column
@@ -48,6 +50,9 @@ public class Annonce {
 	@OneToMany(mappedBy="key.annonce") //fausse erreur. Coonexion virtuelle, ne modifie pas la table
 	private Set<Reponse> reponse;
 	
+	@ManyToOne
+	private Proprio proprio;
+
 	@Version
 	private int version;
 	
@@ -55,33 +60,32 @@ public class Annonce {
 		
 	}
 	
-	
-	
-	public Annonce(String titre, String msg, int numC, Set<Service> listService) {
+	public Annonce(String titre, String message, int numC, Set<Annonce_Service> listService) {
 		this.titre = titre;
-		this.msg = msg;
+		this.message = message;
+		this.statut = 0;
 		this.numC = numC;
-		this.listService = null;
+		this.annonce_service = null;
 	}
-
-	public Annonce(int numA, String titre, String msg, int numC, Set<Service> listService) {
+	
+	public Annonce(int numA, String titre, String message, Set<Annonce_Service> listService) {
 		this.numA = numA;
 		this.titre = titre;
-		this.msg = msg;
-		this.numC = numC;
-		this.listService = null;
-	}
+		this.message = message;
+		this.statut = 0;
+		this.annonce_service = null;
+	} 
 
-	public Annonce(int numA, String titre, String msg, double noteP, double noteS, int statut, int numC,
-			Set<Service>  listService) {
+	public Annonce(int numA, String titre, String message, Double noteP, Double noteS, int statut, int numC,
+			Set<Annonce_Service>  annonce_service) {
 		this.numA = numA;
 		this.titre = titre;
-		this.msg = msg;
+		this.message = message;
 		this.noteP = noteP;
 		this.noteS = noteS;
 		this.statut = 0;
 		this.numC = numC;
-		this.listService = null;
+		this.annonce_service = null;
 	}
 
 	public int getNumA() {
@@ -100,31 +104,31 @@ public class Annonce {
 		this.titre = titre;
 	}
 
-	public String getMsg() {
-		return msg;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public double getNoteP() {
+	public Double getNoteP() {
 		return noteP;
 	}
 
-	public void setNoteP(double noteP) {
+	public void setNoteP(Double noteP) {
 		this.noteP = noteP;
 	}
 
-	public double getNoteS() {
+	public Double getNoteS() {
 		return noteS;
 	}
 
-	public void setNoteS(double noteS) {
+	public void setNoteS(Double noteS) {
 		this.noteS = noteS;
 	}
 
-	public double getStatut() {
+	public int getStatut() {
 		return statut;
 	}
 
@@ -140,12 +144,12 @@ public class Annonce {
 		this.numC = numC;
 	}
 
-	public Set<Service>  getListService() {
-		return listService;
+	public Set<Annonce_Service>  getListService() {
+		return annonce_service;
 	}
 
-	public void setListService(Set<Service>  listService) {
-		this.listService = listService;
+	public void setListService(Set<Annonce_Service>  annonce_service) {
+		this.annonce_service = annonce_service;
 	}
 	
 	public int getVersion() {
