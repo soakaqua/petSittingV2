@@ -26,6 +26,7 @@ public class Proprio extends Compte {
 		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); 
 		List<Annonce> list = new ArrayList();
 		list =daoAnnonce.selectAnnonceByProprio(numC);
+		System.out.println(list); // a enlever ?
 		return list;
 	}
 	
@@ -42,8 +43,18 @@ public class Proprio extends Compte {
 	} 
 	
 
-	public void validerSitter() {
+	public void validerSitter(Integer numC) {
+		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance();
+		List<Annonce> list=afficherAnnoncesPubliees(numC);
 		
+//		DaoReponse daoReponse = DaoReponseFactory.getInstance();
+//		Annonce annSelec= new Annonce();
+//		annSelec=//choix de l'utilisateur
+//		selectReponseByNumA();
+//		
+//		annSelec.setStatut(1);
+//		daoAnnonce.update(annSelec);
+
 	}
 	
 	public void noterS() {
