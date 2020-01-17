@@ -7,12 +7,16 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import model.Annonce;
+import model.Compte;
+import model.Sitter;
 import util.JpaContext;
 
 public class DaoAnnonceJpaImpl implements DaoAnnonce {
 
 	
 	//-----------------------------------------------------------------------------------DAO SPECIFIQUE
+	
+	
 	
 	public List<Annonce> selectAnnonceByProprio(Integer numC) { //afficherAnnoncesPubliees(); Consulter mes annonces PROPRIO
 		EntityManager em=JpaContext.getInstance().createEntityManager();
@@ -46,6 +50,28 @@ public class DaoAnnonceJpaImpl implements DaoAnnonce {
 		return annonces;
 	}
 	
+	public List<Sitter> selectSittersByReponseValidee(Annonce a) {
+		EntityManager em=JpaContext.getInstance().createEntityManager();
+		List<Sitter> sitters=null;
+		int numA=a.getNumA();
+		Query query=em.createQuery("select distinct s from Sitter s left join fetch s.reponse rep where rep.key.numA=:numA");  
+		query.setParameter("numA", numA);
+		sitters=query.getResultList();
+		em.close();
+		return sitters;
+	}
+	
+	public List<Integer> selectNoteSitter(Compte c) {
+		EntityManager em=JpaContext.getInstance().createEntityManager();
+		List<Integer> liste=null;
+		int numC=c.getNumC();
+		Query query=em.createQuery("select distinct noteS from Sitter s left join fetch s.annonce ann where ann.key.numC=:numC");  
+		query.setParameter("numC", numC);
+		liste=query.getResultList();
+		em.close();
+		return liste;
+	}
+
 
 	//-----------------------------------------------------------------------------------DAO CLASSIQUE
 	

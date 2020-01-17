@@ -16,6 +16,8 @@ import javax.persistence.Query;
 
 import dao.DaoAnnonce;
 import dao.DaoAnnonceFactory;
+import dao.DaoReponse;
+import dao.DaoReponseFactory;
 import util.JpaContext;
 
 @Entity
@@ -33,6 +35,9 @@ public class Proprio extends Compte {
 	}
 
 //-----------------------------METHODES--------------------------------------
+	
+	
+	
 	
 	public List<Annonce> afficherAnnoncesPubliees(Integer numC) {
 		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); 
@@ -77,34 +82,40 @@ public class Proprio extends Compte {
 	} 
 	
 	
-//	public void supprReponsesRefusees(Annonce a) {
-//		DaoReponse daoReponse = DaoReponseFactory.getInstance();
-//		EntityManager em = JpaContext.getInstance().createEntityManager();
-//		int bonNumA=a.getNumA();
-//		List<Reponse> reponses = null;
-//		Query query = em.createQuery("from Reponse r where r.numA!=bonNumA");
-//		reponses = query.getResultList();
-//		doaReponse.delete(query);
-//		em.close();
-//	}
-//	
-//	public void validerSitter(Annonce a) {
-//		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance();
-//		DaoReponse daoReponse = DaoReponseFactory.getInstance();
-//
-//		a.setStatut(1);
-//		daoAnnonce.update(a);
-//		supprReponsesRefusees(a);
-//
-//	}
+	public void supprReponsesRefusees(Annonce a) {
+		DaoReponse daoReponse = DaoReponseFactory.getInstance();
+		EntityManager em = JpaContext.getInstance().createEntityManager();
+		int bonNumA=a.getNumA();
+		List<Reponse> reponses = null;
+		Query query = em.createQuery("from Reponse r where r.numA!=bonNumA");
+		reponses = query.getResultList();
+		for (int i=0; i<reponses.size(); i++)  
+			{  daoReponse.delete(reponses.get(i)); }
+		em.close();
+	}
 	
+	public void validerSitter(Annonce a) {
+		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance();
+		DaoReponse daoReponse = DaoReponseFactory.getInstance();
+
+		a.setStatut(1);
+		daoAnnonce.update(a);
+		supprReponsesRefusees(a);
+
+	}
 	
 
-	
-	
-	
-	public void noterS() {
-		
+	public int noterS(Double noteS, Annonce a, Sitter s) {
+		//daoAnnonce.selectSittersByReponseValidee(a);
+		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance();
+		DaoReponse daoReponse = DaoReponseFactory.getInstance();
+
+		List<Integer>liste=daoAnnonce.selectNoteSitter(s);
+		int somme=0;
+		for (int i=0; i<liste.size(); i++)  
+			{ somme+=liste.get(i);}
+		int moyenne=somme/(liste.size());
+		return moyenne;
 	}
 
 
