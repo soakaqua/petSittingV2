@@ -23,10 +23,9 @@ public class Reponse {
 		
 	}
 
-	public Reponse(ReponsePK key, String message, int version) {
+	public Reponse(ReponsePK key, String message) {
 		this.key = key;
 		this.message = message;
-		this.version = version;
 	}
 
 	public ReponsePK getKey() {
