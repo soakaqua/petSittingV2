@@ -31,15 +31,15 @@ public class Proprio extends Compte {
 		return list;
 	}
 	
-	public void publierAnnonce(String titre, String msg, int numC, Set<Service> listService) {
+	public void publierAnnonce(String titre, String message, int numC, Set<Service> listService) {
 		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); 
-		Annonce a=new Annonce(titre, msg, numC,	listService);
+		Annonce a=new Annonce(titre, message, numC,	listService);
 		daoAnnonce.insert(a);
 	}
 	
-	public void modifierAnnonce(int numA, String titre, String msg, int numC, Set<Service> listService) {
+	public void modifierAnnonce(int numA, String titre, String message, int numC, Set<Service> listService) {
 		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); 
-		Annonce a=new Annonce(numA, titre, msg, numC, listService);
+		Annonce a=new Annonce(numA, titre, message, numC, listService);
 		daoAnnonce.update(a);
 	} 
 	
