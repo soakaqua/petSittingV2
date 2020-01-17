@@ -22,7 +22,7 @@ public class ReponsePK implements Serializable {
 		
 	}
 
-	public ReponsePK(Sitter compte, Annonce annonce) {
+	public ReponsePK(Sitter sitter, Annonce annonce) {
 		this.sitter = sitter;
 		this.annonce = annonce;
 	}

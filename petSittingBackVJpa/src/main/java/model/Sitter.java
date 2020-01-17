@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 public class Sitter extends Compte {
 
 	@OneToMany(mappedBy = "key.sitter") //erreur bidon ici
-	private Set<Reponse> réponses;
+	private Set<Reponse> reponses;
 	
 	public Sitter(Integer numC, Integer cp, String mdpC, String mail, String nom, String prenom) {
 	}
