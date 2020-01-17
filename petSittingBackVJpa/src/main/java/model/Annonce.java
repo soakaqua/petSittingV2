@@ -19,6 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import dao.DaoAnnonce;
+import dao.DaoAnnonceFactory;
+
 
 @Entity
 @Table(name="annonce")
@@ -47,6 +50,9 @@ public class Annonce {
 	@OneToMany(mappedBy="key.annonce") //fausse erreur. Coonexion virtuelle, ne modifie pas la table
 	private Set<Reponse> reponse;
 	
+	@ManyToOne
+	private Proprio proprio;
+
 	@Version
 	private int version;
 	
@@ -54,22 +60,21 @@ public class Annonce {
 		
 	}
 	
-	
-	
-	public Annonce(String titre, String message, int numC, Set<Annonce_Service> annonce_service) {
+	public Annonce(String titre, String message, int numC, Set<Annonce_Service> listService) {
 		this.titre = titre;
 		this.message = message;
+		this.statut = 0;
 		this.numC = numC;
 		this.annonce_service = null;
 	}
-
-	public Annonce(int numA, String titre, String message, int numC, Set<Annonce_Service> annonce_service) {
+	
+	public Annonce(int numA, String titre, String message, Set<Annonce_Service> listService) {
 		this.numA = numA;
 		this.titre = titre;
 		this.message = message;
-		this.numC = numC;
+		this.statut = 0;
 		this.annonce_service = null;
-	}
+	} 
 
 	public Annonce(int numA, String titre, String message, Double noteP, Double noteS, int statut, int numC,
 			Set<Annonce_Service>  annonce_service) {
@@ -99,11 +104,11 @@ public class Annonce {
 		this.titre = titre;
 	}
 
-	public String getMsg() {
+	public String getMessage() {
 		return message;
 	}
 
-	public void setMsg(String message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 
