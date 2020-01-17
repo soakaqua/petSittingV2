@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 public class ReponsePK implements Serializable {
 	
 	@ManyToOne
-	@JoinColumn(name = "compte_numc", foreignKey =@ForeignKey(name="reponse_compte_numc_fk"))
-	private Compte compte;
+	@JoinColumn(name = "sitter_numc", foreignKey =@ForeignKey(name="reponse_sitter_numc_fk"))
+	private Sitter sitter;
 	
 	@ManyToOne
 	@JoinColumn(name ="annonce_numa", foreignKey = @ForeignKey(name ="reponse_annonce_numa_fk"))
@@ -22,18 +22,17 @@ public class ReponsePK implements Serializable {
 		
 	}
 
-	public ReponsePK(Compte compte, Annonce annonce) {
-		super();
-		this.compte = compte;
+	public ReponsePK(Sitter compte, Annonce annonce) {
+		this.sitter = sitter;
 		this.annonce = annonce;
 	}
 
 	public Compte getCompte() {
-		return compte;
+		return sitter;
 	}
 
 	public void setCompte(Compte compte) {
-		this.compte = compte;
+		this.sitter = sitter;
 	}
 
 	public Annonce getAnnonce() {
@@ -49,7 +48,7 @@ public class ReponsePK implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((annonce == null) ? 0 : annonce.hashCode());
-		result = prime * result + ((compte == null) ? 0 : compte.hashCode());
+		result = prime * result + ((sitter == null) ? 0 : sitter.hashCode());
 		return result;
 	}
 
@@ -67,10 +66,10 @@ public class ReponsePK implements Serializable {
 				return false;
 		} else if (!annonce.equals(other.annonce))
 			return false;
-		if (compte == null) {
-			if (other.compte != null)
+		if (sitter == null) {
+			if (other.sitter != null)
 				return false;
-		} else if (!compte.equals(other.compte))
+		} else if (!sitter.equals(other.sitter))
 			return false;
 		return true;
 	}
