@@ -39,7 +39,7 @@ public class DaoAnnonceJpaImpl implements DaoAnnonce {
 	public List<Annonce> selectAnnonceBySitter(Integer numC)  { // afficherAnnoncesPostulees(); Consulter mes annonces SITTER
 		EntityManager em=JpaContext.getInstance().createEntityManager();
 		List<Annonce> annonces=null;
-		Query query=em.createQuery("select distinct a from Annonce a left join fetch a.Reponse rep where rep.numC=:numC");  
+		Query query=em.createQuery("select distinct a from Annonce a left join fetch a.reponse rep where rep.key.sitter.numC=:numC");  
 		query.setParameter("numC", numC);
 		annonces=query.getResultList();
 		em.close();
