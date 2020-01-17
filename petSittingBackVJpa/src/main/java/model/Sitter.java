@@ -1,21 +1,11 @@
 package model;
 
-
-
-
-
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.OneToMany;
-import javax.persistence.Query;
 
-import dao.DaoAnnonce;
-import dao.DaoAnnonceFactory;
-import util.JpaContext;
+import javax.persistence.OneToMany;
 
 
 
