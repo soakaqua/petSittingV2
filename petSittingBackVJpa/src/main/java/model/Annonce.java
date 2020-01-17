@@ -3,6 +3,7 @@ package model;
 import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+
+import jpa.model.Enseignement;
 
 @Entity
 @Table(name="annonce")
@@ -34,15 +38,16 @@ public class Annonce {
 	@Column
 	private double noteS;
 	@Column
-	private double statut;
+	private int statut;
 	@Column
-//	@ManyToOne
-//	@JoinColumn(name="room_id",foreignKey = @ForeignKey(name="person_room_id_fk"))
 	private int numC;
-//	@Column
-	@Transient
-	private List<Service> listService = new ArrayList();
-//	private Set<Service> listService;
+	@Column(name="key")
+	@OneToMany(mappedBy="key.annonce") //fausse erreur. Coonexion virtuelle, ne modifie pas la table
+	private Set<Annonce_Service> annonce_service;
+	@Column(name="key")
+	@OneToMany(mappedBy="key.annonce") //fausse erreur. Coonexion virtuelle, ne modifie pas la table
+	private Set<Reponse> reponse;
+	
 	@Version
 	private int version;
 	
@@ -50,17 +55,33 @@ public class Annonce {
 		
 	}
 	
-	public Annonce(int numA, String titre, String msg, double noteP, double noteS, double statut, int numC,
-			List<Service> listService) {
-		super();
+	
+	
+	public Annonce(String titre, String msg, int numC, Set<Service> listService) {
+		this.titre = titre;
+		this.msg = msg;
+		this.numC = numC;
+		this.listService = null;
+	}
+
+	public Annonce(int numA, String titre, String msg, int numC, Set<Service> listService) {
+		this.numA = numA;
+		this.titre = titre;
+		this.msg = msg;
+		this.numC = numC;
+		this.listService = null;
+	}
+
+	public Annonce(int numA, String titre, String msg, double noteP, double noteS, int statut, int numC,
+			Set<Service>  listService) {
 		this.numA = numA;
 		this.titre = titre;
 		this.msg = msg;
 		this.noteP = noteP;
 		this.noteS = noteS;
-		this.statut = statut;
+		this.statut = 0;
 		this.numC = numC;
-		this.listService = listService;
+		this.listService = null;
 	}
 
 	public int getNumA() {
@@ -107,7 +128,7 @@ public class Annonce {
 		return statut;
 	}
 
-	public void setStatut(double statut) {
+	public void setStatut(int statut) {
 		this.statut = statut;
 	}
 
@@ -119,11 +140,11 @@ public class Annonce {
 		this.numC = numC;
 	}
 
-	public List<Service> getListService() {
+	public Set<Service>  getListService() {
 		return listService;
 	}
 
-	public void setListService(List<Service> listService) {
+	public void setListService(Set<Service>  listService) {
 		this.listService = listService;
 	}
 	
