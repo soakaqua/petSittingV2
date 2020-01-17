@@ -16,6 +16,19 @@ public class DaoAnnonceJpaImpl implements DaoAnnonce {
 	
 	//-----------------------------------------------------------------------------------DAO SPECIFIQUE
 	
+	public List<Annonce> SelectAllWithStatut0(){ // attention : supprimer static dans dao.
+		EntityManager em=JpaContext.getInstance().createEntityManager();
+		DaoAnnonce daoAnnonce = DaoAnnonceFactory.getInstance(); // attention : supprimer ligne dans dao.
+
+		
+		Query query = em.createQuery("select a from Annonce a where a.statut=0" ); 
+		List<Annonce> annonces = query.getResultList(); 
+		
+		em.close();
+		
+		return annonces;
+
+	}
 	
 	
 	public List<Annonce> selectAnnonceByProprio(Integer numC) { //afficherAnnoncesPubliees(); Consulter mes annonces PROPRIO

@@ -13,4 +13,5 @@ public interface DaoAnnonce extends DaoGeneric<Annonce,Integer> {
 	public List<Annonce> selectAnnonceBySitter(Integer numC);
 	public List<Sitter> selectSittersByReponseValidee(Annonce a);
 	public List<Integer> selectNoteSitter(Compte c);
+	public List<Annonce> SelectAllWithStatut0();
 }
